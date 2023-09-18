@@ -10,7 +10,7 @@ function ContentS1({changeTostep2,changeContentS2}){
 
 
     const handleSport=(sport)=>{
-        changeTostep2(sport);
+        changeTostep2();
         changeContentS2(sport);
     }
 

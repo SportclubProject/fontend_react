@@ -193,7 +193,7 @@ const AvableCoachsYoga = [
 ];
 
 
-function ContentS2({sport}) {
+function ContentS2({sport,changeTostep3,changeContentS3}) {
     const [data,setdata] = useState([]);
     const [logo,setlogo] = useState();
     const [selectCourt,setselectCourt] = useState({court:"",sportype:sport});
@@ -203,7 +203,6 @@ function ContentS2({sport}) {
     const [selectcoach,setselectcoach] = useState({status:"btn_Nocoach"});
     const [selectwho,setselectwho] = useState({id:"",name:"",des:""})
     const [dataCoach,setdataCoach] = useState([]); 
-    
 
     //State Stytle
     const btn_def = "flex items-center justify-left w-45 h-25 inline-flex bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform"
@@ -262,6 +261,7 @@ function ContentS2({sport}) {
             case "btn_Nocoach":
                 setselectcoach({status:"btn_Nocoach"});
                 setdataCoach([]);
+                setselectwho({});
                 break;
         }
     }
@@ -270,7 +270,19 @@ function ContentS2({sport}) {
         setselectwho({id:coach.id,name:coach.name,des:coach.des})
     }
     const handleNext=()=>{
-
+        const getDataPage2 = {
+            getSport:sport,
+            getCourt:selectCourt.court,
+            getDay:selectday.day,
+            getTime:selectTime,
+            getCoach:selectcoach.status,
+            getWho:selectwho
+        };
+        //console.log(getDataPage2);
+        console.log("Next")
+        changeTostep3();
+        changeContentS3(getDataPage2);
+        
     }
 
     useEffect(()=>{
@@ -293,7 +305,6 @@ function ContentS2({sport}) {
 
     return(
         <>
-        
         <div>
             <div>
                 <h1>SPORT: {sport}</h1>
@@ -348,13 +359,13 @@ function ContentS2({sport}) {
                 </div>
 
                 <div className="flex justify-center m-3">
-                    <div class="h-80 w-96 overflow-auto border-solid border-2 border-gray-500 rounded-md">
+                    <div className="h-80 w-96 overflow-auto border-solid border-2 border-gray-500 rounded-md">
                         {dataCoach.map((eachcoach)=>(
-                            <a href="#" class={selectwho.id==eachcoach.id?card_selected:card_Ava} onClick={()=>handleWho(eachcoach)}>
+                            <a href="#" className={selectwho.id==eachcoach.id?card_selected:card_Ava} onClick={()=>handleWho(eachcoach)}>
                                 <img src={eachcoach.image} alt="" className='h-16 w-16 rounded-full'/>
                                 <div className='flex flex-col justify-center'>
-                                    <h2 class="mb-2 text-2xl font-bold tracking-tight :text-black"><span>{eachcoach.name}</span></h2>
-                                    <p class="font-normal text-gray-700 dark:text-gray-400"><span>{eachcoach.des}</span></p>
+                                    <h2 className="mb-2 text-2xl font-bold tracking-tight :text-black"><span>{eachcoach.name}</span></h2>
+                                    <p className="font-normal text-gray-700 dark:text-gray-400"><span>{eachcoach.des}</span></p>
                                 </div>
                             </a>
                         ))}
@@ -364,7 +375,7 @@ function ContentS2({sport}) {
             </div>
 
             <div className="m-10 flex justify-end">
-                <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform" oncl onClick={()=>handleNext()}>Next</button>
+                <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform" onClick={()=>handleNext()}>Next</button>
             </div>
             
         </div>

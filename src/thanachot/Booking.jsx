@@ -5,6 +5,8 @@ import ContentS1 from './ContentS1';
 import ContentS2 from './ContentS2';
 import SummaryS1 from './SummaryS1';
 import HowtoS2 from './HowtoS2';
+import HowtoS3 from './HowtoS3';
+import ContentS3 from './ContentS3';
 
 function Booking(){
     const [Howto,setHowto] = useState(<HowtoS1 />);
@@ -25,15 +27,22 @@ function Booking(){
             changeTostep2={changeHowtoS2}
             changeContentS2={changeContentS2}
             />)
-
     }
 
-    function changeHowtoS2(sport){
+    function changeHowtoS2(){
         setHowto(<HowtoS2 />);
     }
     function changeContentS2(sport){
-        setContent(<ContentS2 sport={sport}/>)
+        setContent(<ContentS2 sport={sport} changeTostep3={changeHowtoS3} changeContentS3={changeContentS3}/>);
     }
+    function changeHowtoS3(){
+        setHowto(<HowtoS3 />);
+    }
+    function changeContentS3(data){
+        setContent(<ContentS3 data={data}/>)
+    }
+
+    
 
 
     return(
