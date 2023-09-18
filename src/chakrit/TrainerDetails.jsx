@@ -93,41 +93,30 @@ const TrainerDetails = () => {
   return (
 
 
-    <div className='trainers-container text-center my-12'>
+    <div className='trainers-container text-center my-12 flex-col justify-center'>
 
-        <h1 className='text-7xl'>Trainer Details</h1>
+        <h1 className='text-7xl my-5'>Trainer</h1>
 
-        <div className='activity-list flex gap-5 justify-center p-5 mt-5'>
+        <div className='activity-list flex flex-wrap gap-3 justify-center py-5 min-w-full'>
+ 
+            <button className='activity-tennis p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Tennis')}>Tennis</button>
 
-            <div className='activity-tennis py-3 px-5 bg-green-500 rounded-xl w-1/6'>
-                <button onClick={() => setFilterActivity('Tennis')}>Tennis</button>
-            </div>
+            <button className='activity-badminton p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Badminton')}>Badminton</button>
 
-            <div className='activity-badminton py-3 px-5 bg-green-500 rounded-xl w-1/6'>
-                <button onClick={() => setFilterActivity('Badminton')}>Badminton</button>
-            </div>
+            <button className='activity-swim p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Swim')}>Swim</button>
 
-            <div className='activity-swim py-3 px-5 bg-green-500 rounded-xl w-1/6'>
-                <button onClick={() => setFilterActivity('Swim')}>Swim</button>
-            </div>
+            <button className='activity-yoga p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Yoga')}>Yoga</button>
 
-            <div className='activity-yoga py-3 px-5 bg-green-500 rounded-xl w-1/6'>
-                <button onClick={() => setFilterActivity('Yoga')}>Yoga</button>
-            </div>
-
-            <div className='activity-aerobicdance py-3 px-5 bg-green-500 rounded-xl w-1/6'>
-                <button onClick={() => setFilterActivity('Aerobic Dance')}>Aerobic Dance</button>
-            </div>         
-
-            <div className='activity-all py-3 px-5 bg-green-500 rounded-xl w-1/6'>
-                <button onClick={() => setFilterActivity('')}>All</button>
-            </div>   
+            <button className='activity-aerobicdance p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Aerobic Dance')}>Aerobic Dance</button>
+        
+            <button className='activity-all p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('')}>All</button>
+ 
             
         </div>
 
-        <div className='active-btn flex justify-end mr-10 '>
+        <div className='active-btn flex justify-end mr-10'>
             <select 
-                className='w-12 border-solid border-2 border-sky-500'
+                className='w-15 border-solid border-2 border-sky-500'
                 value={sortName}
                 onChange={(e) => setSortName(e.target.value)}>
                     <option value=""> </option>
@@ -136,7 +125,7 @@ const TrainerDetails = () => {
             </select>
         </div>
 
-        <div className='trainers-list flex flex-wrap m-3 gap-2 justify-center'>
+        <div className='trainers-list flex flex-wrap m-auto mt-3 gap-2 w-5/6 justify-normal border-solid border-2 border-sky-500'>
 
             {trainers
                 .filter((trainers) => filterActivity === '' || trainers.activity === filterActivity)
@@ -151,13 +140,13 @@ const TrainerDetails = () => {
                   })
                 .slice(0, 10)
                 .map((trainer) => (
-                    <div key={trainer.id} className='trainer-card border-solid border-2 border-sky-500 rounded-2xl w-1/6 max-w-xs cursor-pointer '>
+                    <div key={trainer.id} className='trainer-card border-solid border-2 border-sky-500 rounded-2xl w-60 cursor-pointer '>
 
                         <h2 className='my-3'>{trainer.name}</h2>
 
                         <img className='w-fit m-auto' src="https://v9s7w7m6.rocketcdn.me/wp-content/uploads/2020/07/5f1394569536d5.97818895.jpg" alt="samoyed" style={{height: '100px'}}/>
 
-                        <div className='px-4 mt-3 object-cover flex jus'>
+                        <div className='px-6 mt-3 flex'>
                             <h2 className='text-start'>Information</h2>
                             {/* <button  onClick={() => toggleInfo(trainer.id)}>
                                 {showInfo[trainer.id] ? 'Hide' : 'Show'}
@@ -166,8 +155,7 @@ const TrainerDetails = () => {
                         
 
                         {/* <div className={`px-4 my-3 object-cover ${showInfo[trainer.id] ? 'block' : 'hidden'}`}> */}
-                        <div className='px-4 mb-3 object-cover'>
-                            
+                        <div className='px-6 mb-3'>
                             <h3 className='text-start'>Activity: {trainer.activity}</h3>
                             <p className='text-start'>{trainer.information}</p>
                         </div>
