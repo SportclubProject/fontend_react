@@ -1,12 +1,14 @@
-
+import React from 'react'
 import './App.css'
-import Profile from './peeraya/Profile'
+import Layout from './kridchasorn/Layout'
+
+
 function App() {
   return (
-    <>
-    <Profile/>
+    <Layout>
+      <h1>This is Landing Page</h1>
       
-    </>
+    </Layout>
     
   )
 }
