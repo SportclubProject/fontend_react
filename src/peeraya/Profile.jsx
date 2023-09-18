@@ -1,39 +1,36 @@
 import React, { useState } from 'react';
 import App from '../App';
 
-// const userprofile =[
-//     {
-//         name: "John",
-//         lastnames: "Doe",
-//         img: "",
-//     }
 
-// ]
-// import 
+const userprofile =[
+    {
+        name: "John",
+        lastnames: "Doe",
+        img: "",
+    }
+
+]
+
 const ProfileComponent = () => {
-    const [name, setName] = useState('John'); 
-    const [lastname, setLastname] = useState('Doe'); 
-    const [aboutme,setAboutme] = useState()
+    const [name, setName] = useState('Mumu'); 
+    const [lastname, setLastname] = useState('mue'); 
+
     const showProfile = async (name,lastname) => {
         
     }
 
     return (
         <>
-            <div className="bg-sky-900">
-                <h2 className='text-neutral-50 '>My Profile</h2>
+            <div>
+                <h2 className='bg-red-200 min-h-screen'>My Profile</h2>
             </div>
             <div>
                 <img src="" alt="" />
-                <p> {name}  {lastname}</p>
-            </div>
-            <div >
-                <p> About me  {aboutme} </p>
+                <p>Name: {name}</p>
+                <p>Lastname: {lastname}</p>
             </div>
         </>
     )
 }
 
 export default ProfileComponent;
-
-
