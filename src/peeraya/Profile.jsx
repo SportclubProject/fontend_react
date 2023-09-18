@@ -11,7 +11,7 @@ import App from '../App';
 // ]
 // import 
 const ProfileComponent = () => {
-    const [name, setName] = useState('John'); 
+    const [name, setName] = useState ('John'); 
     const [lastname, setLastname] = useState('Doe'); 
     const [aboutme,setAboutme] = useState()
     const showProfile = async (name,lastname) => {
