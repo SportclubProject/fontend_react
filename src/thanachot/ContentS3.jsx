@@ -78,7 +78,7 @@ function ContentS3({data}){
                     </div>
                     <div>
                         <label for="phone" class={label}>Phone number</label>
-                        <input type="tel" id="phone" class={inputStyle} placeholder="123-45-678" pattern="[0-9]{10}" required/>
+                        <input type="tel" id="phone" class={inputStyle} placeholder="1234567890" pattern="[0-9]{10}" required/>
                     </div>
                     <div>
                         <label for="visitors" class={label}>Visitors</label>

@@ -52,22 +52,7 @@ const getYoga = [
         id:1,
         sportType:"yoga",
         court:"1"
-    },
-    {
-        id:2,
-        sportType:"yoga",
-        court:"2"
-    },
-    {
-        id:3,
-        sportType:"yoga",
-        court:"3"
-    },
-    {
-        id:4,
-        sportType:"yoga",
-        court:"4"
-    },
+    }
 ]
 const date_init = [
     { id:1,time: '06.00-07.00', status: '' },
@@ -177,19 +162,7 @@ const AvableCoachsYoga = [
         name:"kru Goland_yoga",
         image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi-YZtDIDmOGsFAsQCXIqc0wA-8jNIUuWInQ&usqp=CAU",
         des:"fast"
-    },
-    {
-        id:2,
-        name:"kru type_yoga",
-        image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi-YZtDIDmOGsFAsQCXIqc0wA-8jNIUuWInQ&usqp=CAU",
-        des:"smart"
-    },
-    {
-        id:4,
-        name:"kru java_yoga",
-        image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi-YZtDIDmOGsFAsQCXIqc0wA-8jNIUuWInQ&usqp=CAU",
-        des:"friend"
-    },
+    }
 ];
 
 
