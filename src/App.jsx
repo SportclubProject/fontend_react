@@ -1,11 +1,10 @@
-
+import TrainerDetails from './chakrit/TrainerDetails'
 import './App.css'
-import Profile from './peeraya/Profile'
+
 function App() {
   return (
     <>
-    <Profile/>
-      
+      <TrainerDetails />
     </>
     
   )
