@@ -5,8 +5,8 @@ import Login from './chakrit/Login'
 function App() {
   return (
     <>
-      <Login />
-      {/* <TrainerDetails /> */}
+      {/* <Login /> */}
+      <TrainerDetails />
     </>
     
   )

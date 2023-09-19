@@ -114,7 +114,7 @@ const TrainerDetails = () => {
             
         </div>
 
-        <div className='active-btn flex justify-end mr-10'>
+        <div className='active-btn flex justify-end mr-12'>
             <select 
                 className='w-15 border-solid border-2 border-sky-500'
                 value={sortName}
@@ -125,7 +125,7 @@ const TrainerDetails = () => {
             </select>
         </div>
 
-        <div className='trainers-list flex flex-wrap m-auto mt-3 gap-2 w-5/6 justify-normal border-solid border-2 border-sky-500'>
+        <div className='trainers-list flex flex-wrap m-auto mt-3 gap-2 w-full justify-center'>
 
             {trainers
                 .filter((trainers) => filterActivity === '' || trainers.activity === filterActivity)
