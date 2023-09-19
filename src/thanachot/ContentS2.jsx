@@ -344,10 +344,10 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
                         ))}
                     </div>
                 </div>
-                
             </div>
 
-            <div className="m-10 flex justify-end">
+            <div className="m-10 flex justify-between">
+                <button className="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">Back</button>
                 <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform" onClick={()=>handleNext()}>Next</button>
             </div>
             
