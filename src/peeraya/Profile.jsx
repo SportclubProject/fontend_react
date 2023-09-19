@@ -1,39 +1,51 @@
 import React, { useState } from 'react';
-import App from '../App';
 
-// const userprofile =[
-//     {
-//         name: "John",
-//         lastnames: "Doe",
-//         img: "",
-//     }
+const userprofile = [
+  {
+    id: 1,
+    name: "John",
+    lastnames: "Doe",
+    img: "",
+  },
+  {
+    id: 2,
+    name: "Julia",
+    lastnames: "loe",
+    img: "",
+  }
+]
 
-// ]
-// import 
-const ProfileComponent = () => {
-    const [name, setName] = useState('John'); 
-    const [lastname, setLastname] = useState('Doe'); 
-    const [aboutme,setAboutme] = useState()
-    const showProfile = async (name,lastname) => {
-        
-    }
+const Profilecard = () => {
+  const [showProfile, setShowProfile] = useState(); 
 
-    return (
-        <>
-            <div className="bg-sky-900">
-                <h2 className='text-neutral-50 '>My Profile</h2>
-            </div>
-            <div>
-                <img src="" alt="" />
-                <p> {name}  {lastname}</p>
-            </div>
-            <div >
-                <p> About me  {aboutme} </p>
-            </div>
-        </>
-    )
+  const profile = () => {
+    setShowProfile(
+      <div>
+        {userprofile.map(user => (
+          <div key={user.id}>
+            <h3>Name: {user.name}</h3>
+            <p>Last Name: {user.lastnames}</p>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  
+  profile();
+
+  return (
+    <>
+      <div className="profile-card">
+        <div className="profile-header">
+          <h2 className='text-neutral-50'>My Profile</h2>
+        </div>
+        <div className="profile-content">
+          {showProfile}
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default ProfileComponent;
-
-
+export default Profilecard;

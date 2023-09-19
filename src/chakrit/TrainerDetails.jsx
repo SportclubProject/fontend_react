@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import Layout from '../kridchasorn/Layout';
 
 
 const TrainerDetails = () => {
@@ -92,81 +93,82 @@ const TrainerDetails = () => {
 
   return (
 
+    <Layout>
 
-    <div className='trainers-container text-center my-12 flex-col justify-center'>
 
-        <h1 className='text-7xl my-5'>Trainer</h1>
+        <div className='trainers-container text-center my-12 flex-col justify-center'>
 
-        <div className='activity-list flex flex-wrap gap-3 justify-center py-5 min-w-full'>
- 
-            <button className='activity-tennis p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Tennis')}>Tennis</button>
+            <h1 className='text-7xl my-5 pt-10'>Trainer</h1>
 
-            <button className='activity-badminton p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Badminton')}>Badminton</button>
-
-            <button className='activity-swim p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Swim')}>Swim</button>
-
-            <button className='activity-yoga p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Yoga')}>Yoga</button>
-
-            <button className='activity-aerobicdance p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Aerobic Dance')}>Aerobic Dance</button>
-        
-            <button className='activity-all p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('')}>All</button>
- 
-            
-        </div>
-
-        <div className='active-btn flex justify-end mr-12'>
-            <select 
-                className='w-15 border-solid border-2 border-sky-500'
-                value={sortName}
-                onChange={(e) => setSortName(e.target.value)}>
-                    <option value=""> </option>
-                    <option value="nameAZ">A-Z</option>
-                    <option value="nameZA">Z-A</option>
-            </select>
-        </div>
-
-        <div className='trainers-list flex flex-wrap m-auto mt-3 gap-2 w-full justify-center'>
-
-            {trainers
-                .filter((trainers) => filterActivity === '' || trainers.activity === filterActivity)
-                .sort((a, b) => {
-                    if (sortName === 'nameAZ') {
-                      return a.name.localeCompare(b.name);
-                    }
-                    if (sortName === 'nameZA') {
-                      return b.name.localeCompare(a.name);
-                    }
-                    return 0;
-                  })
-                .slice(0, 10)
-                .map((trainer) => (
-                    <div key={trainer.id} className='trainer-card border-solid border-2 border-sky-500 rounded-2xl w-60 cursor-pointer '>
-
-                        <h2 className='my-3'>{trainer.name}</h2>
-
-                        <img className='w-fit m-auto' src="https://v9s7w7m6.rocketcdn.me/wp-content/uploads/2020/07/5f1394569536d5.97818895.jpg" alt="samoyed" style={{height: '100px'}}/>
-
-                        <div className='px-6 mt-3 flex'>
-                            <h2 className='text-start'>Information</h2>
-                            {/* <button  onClick={() => toggleInfo(trainer.id)}>
-                                {showInfo[trainer.id] ? 'Hide' : 'Show'}
-                            </button> */}
-                        </div>
-                        
-
-                        {/* <div className={`px-4 my-3 object-cover ${showInfo[trainer.id] ? 'block' : 'hidden'}`}> */}
-                        <div className='px-6 mb-3'>
-                            <h3 className='text-start'>Activity: {trainer.activity}</h3>
-                            <p className='text-start'>{trainer.information}</p>
-                        </div>
-                        
-                    </div>
-            ))}
-
-        </div>
-
-    </div>
+            <div className='activity-list flex flex-wrap gap-3 justify-center py-5 min-w-full'>
     
+                <button className='activity-tennis p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Tennis')}>Tennis</button>
+
+                <button className='activity-badminton p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Badminton')}>Badminton</button>
+
+                <button className='activity-swim p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Swim')}>Swim</button>
+
+                <button className='activity-yoga p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Yoga')}>Yoga</button>
+
+                <button className='activity-aerobicdance p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Aerobic Dance')}>Aerobic Dance</button>
+            
+                <button className='activity-all p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('')}>All</button>
+                
+            </div>
+
+            <div className='active-btn flex justify-end mr-10'>
+                <select 
+                    className='w-15 border-solid border-2 border-sky-500'
+                    value={sortName}
+                    onChange={(e) => setSortName(e.target.value)}>
+                        <option value=""> </option>
+                        <option value="nameAZ">A-Z</option>
+                        <option value="nameZA">Z-A</option>
+                </select>
+            </div>
+
+            <div className='trainers-list flex flex-wrap m-auto mt-3 gap-2 w-5/6 justify-normal '>
+
+                {trainers
+                    .filter((trainers) => filterActivity === '' || trainers.activity === filterActivity)
+                    .sort((a, b) => {
+                        if (sortName === 'nameAZ') {
+                        return a.name.localeCompare(b.name);
+                        }
+                        if (sortName === 'nameZA') {
+                        return b.name.localeCompare(a.name);
+                        }
+                        return 0;
+                    })
+                    .slice(0, 10)
+                    .map((trainer) => (
+                        <div key={trainer.id} className='trainer-card border-solid border-2 border-sky-500 rounded-2xl w-60 cursor-pointer '>
+
+                            <h2 className='my-3'>{trainer.name}</h2>
+
+                            <img className='w-fit m-auto' src="https://v9s7w7m6.rocketcdn.me/wp-content/uploads/2020/07/5f1394569536d5.97818895.jpg" alt="samoyed" style={{height: '100px'}}/>
+
+                            <div className='px-6 mt-3 flex'>
+                                <h2 className='text-start'>Information</h2>
+                                {/* <button  onClick={() => toggleInfo(trainer.id)}>
+                                    {showInfo[trainer.id] ? 'Hide' : 'Show'}
+                                </button> */}
+                            </div>
+                            
+
+                            {/* <div className={`px-4 my-3 object-cover ${showInfo[trainer.id] ? 'block' : 'hidden'}`}> */}
+                            <div className='px-6 mb-3'>
+                                <h3 className='text-start'>Activity: {trainer.activity}</h3>
+                                <p className='text-start'>{trainer.information}</p>
+                            </div>
+                            
+                        </div>
+                ))}
+
+            </div>
+
+        </div>
+    </Layout>
   )
 }
 

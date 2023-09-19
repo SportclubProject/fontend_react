@@ -1,13 +1,15 @@
-import TrainerDetails from './chakrit/TrainerDetails'
+import React from 'react'
 import './App.css'
-import Login from './chakrit/Login'
+import Layout from './kridchasorn/Layout'
+
 
 function App() {
   return (
-    <>
-      {/* <Login /> */}
-      <TrainerDetails />
-    </>
+    <Layout>
+      
+      
+    </Layout>
+
     
   )
 }
