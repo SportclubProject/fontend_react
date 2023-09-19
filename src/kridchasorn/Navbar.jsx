@@ -11,14 +11,14 @@ const Navbar = () => {
                 <img src="/src/assets/icons/image-logo.png" alt="Logo Website" className="logo-icon w-11 h-11 " />
                 <h2 className='text-3xl pl-3 '>Sport Club</h2>
             </div>
-            <ul className="nav-link w-2/5 flex justify-between">
+            <ul className="nav-link w-2/4 flex justify-between ">
                 <li><Link to={'/'} className='hover:text-emerald-400 hover:font-bold'>Home</Link></li>
                 <li><Link to={'/booikng'} className='hover:text-emerald-400 hover:font-bold'>Booking</Link></li>
                 <li><Link to={'/coach'} className='hover:text-emerald-400 hover:font-bold'>Coach</Link></li>
                 <li><Link to={'/about-us'} className='hover:text-emerald-400 hover:font-bold'>About Us</Link></li>
                 <li><Link to={'/contact-us'} className='hover:text-emerald-400 hover:font-bold'>Contact Us</Link></li>
                 <li><Link to={'/profile'}><img src="/src/assets/icons/login-icon.png" alt="" className="login-icon w-8" /></Link></li>
-                <li><Link to={'/login'} className='hover:text-emerald-400 hover:font-bold'>Log in</Link></li>
+                <li><Link to={'/login'} className='hover:text-white hover:font-bold'><button className='w-20 rounded-lg border-2 border-emerald-400 hover:bg-emerald-400'>Log in</button></Link></li>
             </ul>
        </div>
     )

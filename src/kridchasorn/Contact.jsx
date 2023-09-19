@@ -13,6 +13,7 @@ const ContactUs = () => {
     const [displayValue,setDisplayValue] = useState('');
 
     const handleSubmit = (e) => {
+        alert('send this message ?');
         e.preventDefault();
         const info = {firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, message: message};
         setDisplayValue(info)
@@ -26,7 +27,7 @@ const ContactUs = () => {
 
     return(
         <Layout>
-            <div className="contact-container mt-36 p-10 w-full h-4/5 flex justify-center items-stretch  bg-sky-100">
+            <div className="contact-container mt-28 p-10 w-full h-4/5 flex justify-center items-stretch  bg-sky-100">
                 <div className="contact-content flex bg-white m-0 p-0 rounded-md shadow-xl">
             <div className="get-intouch w-3/4 rounded-md text-gray-900 m-0 p-10 flex flex-col justify-center items-start bg-center bg-no-repeat " style={{backgroundImage : 'url(/src/assets/images/bg-contact.jpeg)'}}>
                 <div className="content-contact w-full h-full m-0 p-10 bg-blue-200 bg-opacity-70">
