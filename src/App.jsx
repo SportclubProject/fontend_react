@@ -1,11 +1,12 @@
-
+import TrainerDetails from './chakrit/TrainerDetails'
 import './App.css'
-import Profile from './peeraya/Profile'
+import Login from './chakrit/Login'
+
 function App() {
   return (
     <>
-    <Profile/>
-      
+      <Login />
+      {/* <TrainerDetails /> */}
     </>
     
   )
