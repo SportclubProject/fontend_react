@@ -7,6 +7,7 @@ import SummaryS1 from './SummaryS1';
 import HowtoS2 from './HowtoS2';
 import HowtoS3 from './HowtoS3';
 import ContentS3 from './ContentS3';
+import Layout from '../kridchasorn/Layout';
 
 function Booking(){
     const [Howto,setHowto] = useState(<HowtoS1 />);
@@ -46,6 +47,8 @@ function Booking(){
 
 
     return(
+        <Layout>
+
         <div>
             <div className='page_title'>
                 <h1>Booking</h1>
@@ -76,7 +79,7 @@ function Booking(){
                 </div>
             </div>
         </div>
-
+        </Layout>
     );
 }
 

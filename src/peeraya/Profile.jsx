@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
 
-const userprofile = [
-  {
-    id: 1,
-    name: "John",
-    lastnames: "Doe",
-    img: "",
-  },
-  {
-    id: 2,
-    name: "Julia",
-    lastnames: "loe",
-    img: "",
-  }
-]
+
 
 const Profilecard = () => {
   const [showProfile, setShowProfile] = useState(); 
+  const userprofile = [
+    {
+      id: 1,
+      name: "John",
+      lastnames: "Doe",
+      img: "",
+    },
+    {
+      id: 2,
+      name: "Julia",
+      lastnames: "loe",
+      img: "",
+    }
+  ]
 
   const profile = () => {
+
     setShowProfile(
       <div>
         {userprofile.map(user => (

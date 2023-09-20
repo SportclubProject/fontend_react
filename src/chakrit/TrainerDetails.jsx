@@ -102,17 +102,17 @@ const TrainerDetails = () => {
 
             <div className='activity-list flex flex-wrap gap-3 justify-center py-5 min-w-full'>
     
-                <button className='activity-tennis p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Tennis')}>Tennis</button>
+                <button className='activity-tennis p-3 bg-emerald-400 rounded-xl w-40' onClick={() => setFilterActivity('Tennis')}>Tennis</button>
 
-                <button className='activity-badminton p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Badminton')}>Badminton</button>
+                <button className='activity-badminton p-3 bg-emerald-400 rounded-xl w-40' onClick={() => setFilterActivity('Badminton')}>Badminton</button>
 
-                <button className='activity-swim p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Swim')}>Swim</button>
+                <button className='activity-swim p-3 bg-emerald-400 rounded-xl w-40' onClick={() => setFilterActivity('Swim')}>Swim</button>
 
-                <button className='activity-yoga p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Yoga')}>Yoga</button>
+                <button className='activity-yoga p-3 bg-emerald-400 rounded-xl w-40' onClick={() => setFilterActivity('Yoga')}>Yoga</button>
 
-                <button className='activity-aerobicdance p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('Aerobic Dance')}>Aerobic Dance</button>
+                <button className='activity-aerobicdance p-3 bg-emerald-400 rounded-xl w-40' onClick={() => setFilterActivity('Aerobic Dance')}>Aerobic Dance</button>
             
-                <button className='activity-all p-3 bg-green-500 rounded-xl w-40' onClick={() => setFilterActivity('')}>All</button>
+                <button className='activity-all p-3 bg-emerald-400 rounded-xl w-40' onClick={() => setFilterActivity('')}>All</button>
                 
             </div>
 
