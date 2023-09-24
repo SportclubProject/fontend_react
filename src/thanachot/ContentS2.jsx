@@ -1,7 +1,8 @@
-import { useState,useEffect} from 'react'
+import { useContext,useState,useEffect} from 'react'
 import courtTennislogo from './img/tennis-court.png'
 import courtBad from './img/badminton-court.png'
 import roomYoga from './img/yoga_room.png'
+import {CustomContext} from './Booking'
 const getTennis = [
     {
         id:1,
@@ -177,6 +178,8 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
     const [selectwho,setselectwho] = useState({id:"",name:"",des:""})
     const [dataCoach,setdataCoach] = useState([]); 
 
+    const contextValue = useContext(CustomContext);
+
     //State Stytle
     const btn_def = "flex items-center justify-left w-45 h-25 inline-flex bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform"
     const btn_select = "flex items-center justify-left w-45 h-25 inline-flex bg-purple-300  text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow outline-none transform active:scale-75 transition-transform hover:bg-purple-100"
@@ -193,10 +196,21 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
     const card_selected = "flex flex-row block max-w-sm p-6 bg-purple-300 border border-gray-200 rounded-lg shadow hover:bg-purple-100"
 
     const handelcourt=(id,sport)=>{
-        setselectCourt({court:id,})
+        setselectCourt({court:id,});
+        //update data context booking
+        contextValue.setbookdata((previousState)=>{ 
+            return {...previousState,sport:sport}
+        });
+
+
     }
     const handleDay=(e,day)=>{
-        setselectday({day:day})
+        setselectday({day:day});
+        //update data context booking
+        contextValue.setbookdata((previousState)=>{ 
+            return {...previousState,day:day}
+        });
+
         // const btn = e.target.id;
         // console.log(btn)
         switch(day){
@@ -213,6 +227,10 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
     const handleTime=(time)=>{
         // console.log(`select:${time.id} and ${time.time}`)
         setselectTime({id:time.id,time:time.time});
+        //update data context booking
+        contextValue.setbookdata((previousState)=>{ 
+            return {...previousState,time:time.time}
+        });
     };
     const handleCoach=(status)=>{
         switch(status){
@@ -221,6 +239,10 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
                 switch(sport){
                     case "tennis":
                         setdataCoach(AvableCoachsTennis);
+                        //update data context booking
+                        contextValue.setbookdata((previousState)=>{ 
+                            return {...previousState,coach:status}
+                        });
                         break;
                     case "badminton":
                         setdataCoach(AvableCoachsBadminton);
@@ -233,6 +255,9 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
                 break;
             case "btn_Nocoach":
                 setselectcoach({status:"btn_Nocoach"});
+                contextValue.setbookdata((previousState)=>{ 
+                    return {...previousState,coach:status}
+                });
                 setdataCoach([]);
                 setselectwho({});
                 break;
@@ -241,6 +266,9 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
     const handleWho=(coach)=>{
         // console.log(`coach:  ${coach.name} ${coach.id}`);
         setselectwho({id:coach.id,name:coach.name,des:coach.des})
+        contextValue.setbookdata((previousState)=>{ 
+            return {...previousState,who:{id:coach.id,name:coach.name,des:coach.des}}
+        });
     }
     const handleNext=()=>{
         const getDataPage2 = {

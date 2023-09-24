@@ -1,4 +1,4 @@
-import { useState,useEffect} from 'react'
+import { createContext,useState,useEffect} from 'react'
 import './Booking.css'
 import HowtoS1 from './HowtoS1';
 import ContentS1 from './ContentS1';
@@ -9,19 +9,33 @@ import HowtoS3 from './HowtoS3';
 import ContentS3 from './ContentS3';
 import Layout from '../kridchasorn/Layout';
 
+const CustomContext = createContext({});
 
 function Booking(){
+    
     const [Howto,setHowto] = useState(<HowtoS1 />);
     const [Content,setContent] = useState(<ContentS1 
                                             changeTostep2={changeHowtoS2}
                                             changeContentS2={changeContentS2}
                                             />);
     const [Summary,setSummary] = useState(<SummaryS1 />);
+    //state นี้เป็นชุดข้อมูลใหญ่ที่ทำการเก็บข้อมูลการจองทั้งหมดไว้ ใช้ในการ booking ทั้งหมด
+    //เพื่อการ back หรือ forword และสรุปจบ
+    const [bookdata,setbookdata] = useState(
+        {
+            sport:"",
+            day:"",     //[today,tomoror]
+            time:"",    //[time]
+            coach:"",
+            who:{
+                id:"",
+                name:"",
+                image:"",
+                des:""
+            }
+        });
 
-
-    useEffect(()=>{
-        
-    },[]);
+    // useEffect(()=>{},[])
 
     function handleNext(){
         setHowto(<HowtoS1 />)
@@ -43,42 +57,45 @@ function Booking(){
     function changeContentS3(data){
         setContent(<ContentS3 data={data}/>)
     }
-
-    
-
-
     return(
         <Layout>
-        <div className='mt-20'>
-            <div className='page_title'>
-                <h1>Booking</h1>
+            <CustomContext.Provider
+            value={{
+                bookdata:bookdata,
+                setbookdata:setbookdata
+            }}
+                >
+            <div className='mt-20'>
+                <div className='page_title'>
+                    <h1>Booking</h1>
+                </div>
+
+                <div className='page_body h-[90vh]'>
+                    <div className='bodyHowTo'>
+                        <h1>how to book</h1>
+                        {Howto}
+                    </div>
+
+                    <div className='bodyContent'>
+                        <h1>Content</h1>
+                        {Content}
+                    </div>
+
+                    <div className='bodySummary'>
+                        <h1>Summary</h1>
+                        {Summary}
+                    </div>
+                </div>
+
+                <div >
+                    <div className='page_footer flex justify-between'>
+                        <button className='bg-transparent hover:bg-blue-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform' onClick={handleNext}>Booking</button>
+                        {/* <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform' onClick={handleNext}>Next Step</button> */}
+                        
+                    </div>
+                </div>
             </div>
-
-            <div className='page_body h-[90vh]'>
-                <div className='bodyHowTo'>
-                    <h1>how to book</h1>
-                    {Howto}
-                </div>
-
-                <div className='bodyContent'>
-                    <h1>Content</h1>
-                    {Content}
-                </div>
-
-                <div className='bodySummary'>
-                    <h1>Summary</h1>
-                    {Summary}
-                </div>
-            </div>
-
-            <div >
-                <div className='page_footer flex justify-between'>
-                    <button className='bg-transparent hover:bg-blue-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform' onClick={handleNext}>Booking</button>
-                    {/* <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform' onClick={handleNext}>Next Step</button> */}
-                    
-                </div>
-            </div>
-        </div>
+        </CustomContext.Provider>
         </Layout>
 
     );
@@ -86,3 +103,4 @@ function Booking(){
 
 
 export default Booking
+export {CustomContext};
