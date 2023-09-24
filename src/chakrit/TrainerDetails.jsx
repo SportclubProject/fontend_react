@@ -79,57 +79,6 @@ const TrainerDetails = () => {
 
         const [filterActivity, setFilterActivity] = useState('')
         const [sortName, setSortName] = useState('')
-
-
-       // ฟังก์ชันเรียงลำดับตามชื่อ (a-z)
-        const sortByNameAZ = () => {
-            setSortName('nameAZ');
-            trainers.sort((a, b) => a.name.localeCompare(b.name));
-        };
-
-        // ฟังก์ชันเรียงลำดับตามชื่อ (z-a)
-        const sortByNameZA = () => {
-            setSortName('nameZA');
-            trainers.sort((a, b) => b.name.localeCompare(a.name));
-        };
-
-      
-
-  return (
-    <>
-    <div className='trainers-container' style={{textAlign: 'center'}}>
-
-        <h1>TrainerDetails</h1>
-
-        <div className='activity-list flex' >
-
-            <div className='activity-tennis'style={{margin:'1rem'}}>
-                <button onClick={() => setFilterActivity('Tennis')}>Tennis</button>
-            </div>
-
-            <div className='activity-badminton' style={{margin:'1rem'}}>
-                <button onClick={() => setFilterActivity('Badminton')}>Badminton</button>
-            </div>
-
-            <div className='activity-swim' style={{margin:'1rem'}}>
-                <button onClick={() => setFilterActivity('Swim')}>Swim</button>
-            </div>
-
-            <div className='activity-yoga' style={{margin:'1rem'}}>
-                <button onClick={() => setFilterActivity('Yoga')}>Yoga</button>
-            </div>
-
-            <div className='activity-aerobicdance' style={{margin:'1rem'}}>
-                <button onClick={() => setFilterActivity('Aerobic Dance')}>Aerobic Dance</button>
-            </div>
-
-            <button className='mx-10 rounded bg-green-500 px-10' onClick={sortByNameAZ}>Sort by Name (A-Z)</button>
-            <button onClick={sortByNameZA}>Sort by Name (Z-A)</button>
-            
-        </div>
-
-        <div className='trainers-list'>
-=======
         // const [showInfo, setShowInfo] = useState({});
 
         // const toggleInfo = (id) => {
@@ -178,7 +127,6 @@ const TrainerDetails = () => {
 
         <div className='trainers-list flex flex-wrap m-auto mt-3 gap-2 w-5/6 justify-normal border-solid border-2 border-sky-500'>
 
-
             {trainers
                 .filter((trainers) => filterActivity === '' || trainers.activity === filterActivity)
                 .sort((a, b) => {
@@ -190,19 +138,6 @@ const TrainerDetails = () => {
                     }
                     return 0;
                   })
-
-                .slice(0, 5)
-                .map((trainer) => (
-                    <div key={trainer.id} className='trainer-card'>
-
-                        <h2>{trainer.name}</h2>
-
-                        <img src="https://v9s7w7m6.rocketcdn.me/wp-content/uploads/2020/07/5f1394569536d5.97818895.jpg" alt="samoyed" style={{height: '100px'}}/>
-
-                        <h2>Information</h2>
-                        <h3>Activity: {trainer.activity}</h3>
-                        <p>{trainer.information}</p>
-
                 .slice(0, 10)
                 .map((trainer) => (
                     <div key={trainer.id} className='trainer-card border-solid border-2 border-sky-500 rounded-2xl w-60 cursor-pointer '>
@@ -224,7 +159,6 @@ const TrainerDetails = () => {
                             <h3 className='text-start'>Activity: {trainer.activity}</h3>
                             <p className='text-start'>{trainer.information}</p>
                         </div>
-
                         
                     </div>
             ))}
@@ -232,11 +166,7 @@ const TrainerDetails = () => {
         </div>
 
     </div>
-
-    </>
-=======
     
-
   )
 }
 

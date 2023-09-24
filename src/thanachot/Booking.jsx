@@ -24,6 +24,7 @@ function Booking(){
     const [bookdata,setbookdata] = useState(
         {
             sport:"",
+            location:"",
             day:"",     //[today,tomoror]
             time:"",    //[time]
             coach:"",

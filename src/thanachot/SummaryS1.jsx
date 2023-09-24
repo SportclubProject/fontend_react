@@ -23,6 +23,7 @@ function SummaryS1(){
         <div>
             <h1>Customer--------<span>GU_PP</span> </h1>
             <h1>{contextValue.bookdata.sport}</h1>
+            <h1>Location: {contextValue.bookdata.location}</h1>
             <h1>{contextValue.bookdata.day}</h1>
             <h1>{contextValue.bookdata.time}</h1>
             <h1>{contextValue.bookdata.coach}</h1>

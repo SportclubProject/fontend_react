@@ -168,17 +168,34 @@ const AvableCoachsYoga = [
 
 
 function ContentS2({sport,changeTostep3,changeContentS3}) {
+    const contextValue = useContext(CustomContext);
+
     const [data,setdata] = useState([]);
     const [logo,setlogo] = useState();
     const [selectCourt,setselectCourt] = useState({court:"",sportype:sport});
     const [selectday,setselectday] = useState({day:""});
     const [selectTime,setselectTime] = useState({id:"",time:""});
-    const [showTime,setshowTime] = useState(date_init);
+    const [showTime,setshowTime] = useState(date_today);
     const [selectcoach,setselectcoach] = useState({status:"btn_Nocoach"});
     const [selectwho,setselectwho] = useState({id:"",name:"",des:""})
     const [dataCoach,setdataCoach] = useState([]); 
 
-    const contextValue = useContext(CustomContext);
+    useEffect(()=>{
+        //init dataCoach for reload;
+        if(contextValue.bookdata.coach != ""){
+            switch(sport){
+                case "tennis":
+                    setdataCoach(AvableCoachsTennis);
+                    break;
+                case "badminton":
+                    setdataCoach(AvableCoachsBadminton);
+                    break;
+                case "yoga":
+                    setdataCoach(AvableCoachsYoga);
+                    break;
+            }
+        }
+    },[]);
 
     //State Stytle
     const btn_def = "flex items-center justify-left w-45 h-25 inline-flex bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform"
@@ -199,10 +216,8 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
         setselectCourt({court:id,});
         //update data context booking
         contextValue.setbookdata((previousState)=>{ 
-            return {...previousState,sport:sport}
+            return {...previousState,sport:sport,location:id}
         });
-
-
     }
     const handleDay=(e,day)=>{
         setselectday({day:day});
@@ -246,12 +261,17 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
                         break;
                     case "badminton":
                         setdataCoach(AvableCoachsBadminton);
+                        contextValue.setbookdata((previousState)=>{ 
+                            return {...previousState,coach:status}
+                        });
                         break;
                     case "yoga":
                         setdataCoach(AvableCoachsYoga);
+                        contextValue.setbookdata((previousState)=>{ 
+                            return {...previousState,coach:status}
+                        });
                         break;
                 }
-                
                 break;
             case "btn_Nocoach":
                 setselectcoach({status:"btn_Nocoach"});
@@ -310,11 +330,10 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
             <div>
                 <h1>SPORT: {sport}</h1>
             </div>
-
             <div className='m-2 grid grid-cols-3 gap-3'>
                 {data.map((eachcourt)=>( 
                     <div>
-                        <button className={selectCourt.court==eachcourt.court? btn_select:btn_def} onClick={()=>handelcourt(eachcourt.id,eachcourt.sportType)}>
+                        <button className={contextValue.bookdata.location==eachcourt.court? btn_select:btn_def} onClick={()=>handelcourt(eachcourt.id,eachcourt.sportType)}>
                             <img src={logo} alt="" />
                             <span className='ms-2'>{eachcourt.court}</span>
                         </button>
@@ -325,19 +344,20 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
             <div >
                 <div >
                     <div className="inline-flex">
-                        <button id='btn_day' className={selectCourt.court!=""?((selectday.day=="btn_day")? btn_day:btn_defDayL):btn_NotAva} onClick={(e)=>handleDay(e,"btn_day")}>
+                        <button id='btn_day' className={contextValue.bookdata.location!=""?((contextValue.bookdata.day=="btn_day")? btn_day:btn_defDayL):btn_NotAva} onClick={(e)=>handleDay(e,"btn_day")}>
                             To day
                         </button>
-                        <button id='btn_tow' className={selectCourt.court!=""?((selectday.day=="btn_tow")? btn_day:btn_defDayR):btn_NotAva} onClick={(e)=>handleDay(e,"btn_tow")}>
+                        <button id='btn_tow' className={contextValue.bookdata.location!=""?((contextValue.bookdata.day=="btn_tow")? btn_day:btn_defDayR):btn_NotAva} onClick={(e)=>handleDay(e,"btn_tow")}>
                             Tomorrow
                         </button>
                         </div>
                     </div>
+
                     <div>
                         <div className='m-2 grid grid-cols-4 gap-3'>
                             {showTime.map((eachTime)=>(
                             <div >
-                                <button className={eachTime.status == "available"? (selectTime.id==eachTime.id?btn_dateSelect:btn_dateAva):btn_dateNotAva} onClick={()=>handleTime(eachTime)}>
+                                <button className={eachTime.status == "available"? (contextValue.bookdata.time==eachTime.time?btn_dateSelect:btn_dateAva):btn_dateNotAva} onClick={()=>handleTime(eachTime)}>
                                     <span>{eachTime.time}</span>
                                 </button>
                             </div>
@@ -349,11 +369,11 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
 
             <div>
                 <div className="inline-flex">
-                    <button className={selectTime.time!=""?((selectcoach.status=="btn_coach")? btn_day:btn_defDayL):btn_NotAva} 
+                    <button className={contextValue.bookdata.time!=""?((contextValue.bookdata.coach=="btn_coach")? btn_day:btn_defDayL):btn_NotAva} 
                     onClick={()=>handleCoach("btn_coach")}> 
                         <span>Coach</span> 
                     </button>
-                    <button className={selectTime.time!=""?((selectcoach.status=="btn_Nocoach")? btn_day:btn_defDayL):btn_NotAva}
+                    <button className={contextValue.bookdata.time!=""?((contextValue.bookdata.coach=="btn_Nocoach")? btn_day:btn_defDayL):btn_NotAva}
                     onClick={()=>handleCoach("btn_Nocoach")}>
                         <span>No Coach</span>
                     </button>
@@ -362,7 +382,7 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
                 <div className="flex justify-center m-3">
                     <div className="h-80 w-96 overflow-auto border-solid border-2 border-gray-500 rounded-md">
                         {dataCoach.map((eachcoach)=>(
-                            <a href="#" className={selectwho.id==eachcoach.id?card_selected:card_Ava} onClick={()=>handleWho(eachcoach)}>
+                            <a href="#" className={contextValue.bookdata.who.id==eachcoach.id?card_selected:card_Ava} onClick={()=>handleWho(eachcoach)}>
                                 <img src={eachcoach.image} alt="" className='h-16 w-16 rounded-full'/>
                                 <div className='flex flex-col justify-center'>
                                     <h2 className="mb-2 text-2xl font-bold tracking-tight :text-black"><span>{eachcoach.name}</span></h2>
