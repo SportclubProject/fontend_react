@@ -167,7 +167,7 @@ const AvableCoachsYoga = [
 ];
 
 
-function ContentS2({sport,changeTostep3,changeContentS3}) {
+function ContentS2({sport,changeTostep3,changeContentS3,changeHowtoS1,changeContentS1}) {
     const contextValue = useContext(CustomContext);
 
     const [data,setdata] = useState([]);
@@ -275,11 +275,15 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
                 break;
             case "btn_Nocoach":
                 setselectcoach({status:"btn_Nocoach"});
+                setdataCoach([]);
+                setselectwho({});
+
                 contextValue.setbookdata((previousState)=>{ 
                     return {...previousState,coach:status}
                 });
-                setdataCoach([]);
-                setselectwho({});
+                contextValue.setbookdata((previousState)=>{ 
+                    return {...previousState,who:{id:"",name:"",des:""}}
+                });
                 break;
         }
     }
@@ -291,20 +295,20 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
         });
     }
     const handleNext=()=>{
-        const getDataPage2 = {
-            getSport:sport,
-            getCourt:selectCourt.court,
-            getDay:selectday.day,
-            getTime:selectTime,
-            getCoach:selectcoach.status,
-            getWho:selectwho
-        };
         //console.log(getDataPage2);
         console.log("Next")
         changeTostep3();
-        changeContentS3(getDataPage2);
+        changeContentS3();
         
     }
+
+    const handleBack =()=>{
+        console.log("Back");
+        changeHowtoS1();
+        changeContentS1();
+    }
+
+    
 
     useEffect(()=>{
         switch(sport){
@@ -395,7 +399,7 @@ function ContentS2({sport,changeTostep3,changeContentS3}) {
             </div>
 
             <div className="m-10 flex justify-between">
-                <button className="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">Back</button>
+                <button className="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform" onClick={()=>handleBack()}>Back</button>
                 <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform" onClick={()=>handleNext()}>Next</button>
             </div>
             

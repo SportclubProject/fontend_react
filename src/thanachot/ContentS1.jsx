@@ -11,12 +11,34 @@ const btn_sty = "flex items-center justify-left w-80 h-14 inline-flex bg-white h
 
 // http://www.w3.org/2000/svg
 function ContentS1({changeTostep2,changeContentS2}){
-
     const contextValue = useContext(CustomContext);
     const handleSport=(sport)=>{
         changeTostep2();
         changeContentS2(sport);
     }
+
+    useEffect(()=>{
+        //reset data
+        contextValue.setbookdata((previousState)=>{
+            return  {...previousState,
+                sport:"",
+                location:"",
+                day:"",     //[today,tomoror]
+                time:"",    //[time]
+                coach:"",
+                who:{
+                    id:"",
+                    name:"",
+                    image:"",
+                    des:""
+                },
+                activity:"",
+                fname:"",
+                lname:"",
+                phone:"",
+                desc:""}
+        });
+    },[]);
 
     return (
         <div >
@@ -25,7 +47,6 @@ function ContentS1({changeTostep2,changeContentS2}){
                 <img className='scale-50' src={Tennis_logo} alt="" />
                 <div>
                     <span className='ms-2'>Tennis</span>
-                    <h1>{contextValue.bookdata.sport}</h1>
                 </div>
                 </button>
             </div>

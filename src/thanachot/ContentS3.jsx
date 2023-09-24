@@ -1,10 +1,11 @@
-import { useState,useEffect} from 'react'
+import { useContext,useState,useEffect} from 'react'
 import {CustomContext} from './Booking'
 
 const inputStyle = "mb-2 shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
 const inputStyleDis = "mb-2 shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline";
 const label = "flex text-sm font-medium mb-2 text-gray-900";
-function ContentS3({data}){
+const inputDesc = "resize-none h-full mb-2 shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
+function ContentS3({changeTostep2,changeContentS2}){
     const contextValue = useContext(CustomContext);
 
     const [dataf2,setdataf2] = useState({});
@@ -12,30 +13,10 @@ function ContentS3({data}){
     const [fname,setfname] = useState();
     const [lname,setlname] = useState();
     const [phon,setphone] = useState();
-    const [des,setdes] = useState();
-
+    const [desc,setdesc] = useState();
     
-    const preData = {
-        sport:data.getSport,
-        location:data.getCourt,
-        date:today,
-        time:data.getTime.time,
-        coach:data.getWho.name
-    }
-    useEffect(()=>{
-        // switch(data.getSport){
-        //     case "tennis":
-        //         break;
-        //     case "badminton":
-        //         break;
-        //     case "yoga":
-        //         break;
-        // }
-        // const date = new Date();
-        // new Date(Date.now()).toLocaleString().split(',')[0]
-        // new Date(Date.now()).toLocaleString();
-        // console.log(today);
-    },[]);
+    // useEffect(()=>{        
+    // },[]);
 
     function getDate(status){
         const today = new Date(Date.now());
@@ -58,8 +39,13 @@ function ContentS3({data}){
         return;
     }
 
-    function handleBack(){
+    function handleNext(){
+        //summary page
+    }
 
+    function handleBack(){
+        changeTostep2();
+        changeContentS2(contextValue.bookdata.sport);
     }
 
 
@@ -68,7 +54,7 @@ function ContentS3({data}){
             <div>
                 <h5>Contract Information</h5>
             </div>
-           <form className='p-5'>
+           <form className='p-5' onSubmit={handleNext}>
                 <div>
                         <div class="grid gap-1 md:grid-cols-2">
                             <div>
@@ -88,46 +74,66 @@ function ContentS3({data}){
                             </div>
                             <div>
                                 <label class="flex  text-sm font-medium mb-2 text-gray-900">Time (From-To)</label>
-                                <input type="text" id="disabled-input" aria-label="disabled input" class={inputStyleDis} value={dataf2.time} disabled/>
+                                <input type="text" id="disabled-input" aria-label="disabled input" class={inputStyleDis} value={contextValue.bookdata.time} disabled/>
                             </div>
                         </div>
                         <div>
                             <label class="flex text-sm font-medium mb-2 text-gray-900">Coach</label>
-                            <input type="text" id="disabled-input" aria-label="disabled input" class={inputStyleDis} value={dataf2.coach} disabled/>
+                            <input type="text" id="disabled-input" aria-label="disabled input" class={inputStyleDis} value={contextValue.bookdata.who.name} disabled/>
                         </div>
                 </div>
 
                 <div>
+                {/* contextValue.setbookdata((previousState)=>{ 
+            return {...previousState,activity:e.target.value}
+        }); */}
                     <label class={label}>Activity name</label>
-                    <input type="text" id="activity" className={inputStyle} placeholder="Activity" onChange={(e)=>setact(e.target.value)}/>
+                    <input type="text" id="activity" className={inputStyle} placeholder="Activity" value={contextValue.bookdata.activity} onChange={
+                        (e)=>contextValue.setbookdata((previousState)=>{ 
+                            return {...previousState,activity:e.target.value}
+                        })}/>
                 </div>
 
                 <div class="grid gap-1 md:grid-cols-3">
                     <div>
                         <label for="first_name" class={label}>First name</label>
-                        <input type="text" id="first_name" class={inputStyle} placeholder="John" onChange={(e)=>setfname(e.target.value)} required/>
+                        <input type="text" id="first_name" class={inputStyle} placeholder="John" value={contextValue.bookdata.fname} onChange={
+                            (e)=>contextValue.setbookdata((previousState)=>{ 
+                                return {...previousState,fname:e.target.value}
+                            })}
+                        required/>
                     </div>
                     <div>
                         <label for="last_name" class={label}>Last name</label>
-                        <input type="text" id="last_name" class={inputStyle} placeholder="Doe" onChange={(e)=>setlname(e.target.value)} required/>
+                        <input type="text" id="last_name" class={inputStyle} placeholder="Doe" value={contextValue.bookdata.lname} onChange={
+                            (e)=>contextValue.setbookdata((previousState)=>{ 
+                                return {...previousState,lname:e.target.value}
+                            })}
+                            required/>
                     </div>
                     <div>
                         <label for="phone" class={label}>Phone number</label>
-                        <input type="tel" id="phone" class={inputStyle} placeholder="098xxxx123" pattern="[0-9]{10}" onChange={(e)=>setphone(e.target.value)} required/>
+                        <input type="tel" id="phone" class={inputStyle} placeholder="098xxxx123" pattern="[0-9]{10}" value={contextValue.bookdata.phone} onChange={
+                            (e)=>contextValue.setbookdata((previousState)=>{ 
+                                return {...previousState,phone:e.target.value}
+                            })} 
+                            required/>
                     </div>
-                    {/* <div>
-                        <label for="visitors" class={label}>Visitors</label>
-                        <input type="number" id="visitors" class={inputStyle} placeholder="Number of visitor" required/>
-                    </div> */}
+                    
                 </div>
                 <div className="h-32 mb-10">
                     <label class={label}>Description</label>
-                    <textarea type="message" id="message" placeholder="description How can we help you?" className="resize-none h-full mb-2 shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                    <textarea type="message" id="message" placeholder="description How can we help you?" className={inputDesc} value={contextValue.bookdata.desc} onChange={
+                        (e)=>contextValue.setbookdata((previousState)=>{ 
+                            return {...previousState,desc:e.target.value}
+                        })}
+                        />
+
                 </div>
 
             <div className="m-10 flex justify-between">
                 <button className="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform" onClick={()=>handleBack()}>Back</button>
-                <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">Next</button>
+                <button type='submit' className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">Next</button>
             </div>
 
            </form>

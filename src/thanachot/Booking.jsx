@@ -33,7 +33,12 @@ function Booking(){
                 name:"",
                 image:"",
                 des:""
-            }
+            },
+            activity:"",
+            fname:"",
+            lname:"",
+            phone:"",
+            desc:""
         });
 
     // useEffect(()=>{},[])
@@ -46,17 +51,37 @@ function Booking(){
             />)
     }
 
+    function changeHowtoS1(){
+        setHowto(<HowtoS1 />);
+    }
+    function changeContentS1(){
+        setContent(
+            <ContentS1 
+                changeTostep2={changeHowtoS2}
+                changeContentS2={changeContentS2}
+                />
+        );
+    }
     function changeHowtoS2(){
         setHowto(<HowtoS2 />);
     }
     function changeContentS2(sport){
-        setContent(<ContentS2 sport={sport} changeTostep3={changeHowtoS3} changeContentS3={changeContentS3}/>);
+        setContent(<ContentS2   sport={sport} 
+                                changeTostep3={changeHowtoS3} 
+                                changeContentS3={changeContentS3}
+
+                                changeHowtoS1={changeHowtoS1}
+                                changeContentS1={changeContentS1}
+                                />);
     }
     function changeHowtoS3(){
         setHowto(<HowtoS3 />);
     }
     function changeContentS3(data){
-        setContent(<ContentS3 data={data}/>)
+        setContent(<ContentS3 data={data}
+                    changeTostep2={changeHowtoS2}
+                    changeContentS2={changeContentS2}
+                    />)
     }
     return(
         <Layout>
