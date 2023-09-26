@@ -1,12 +1,4 @@
 import React from 'react'
-
-
-const AboutUs = () => {
-    return(
-        <>
-        
-        </>
-
 import Layout from './Layout.jsx'
 
 const AboutUs = () => {
@@ -50,8 +42,7 @@ const AboutUs = () => {
                 </div>
             </div>
         </Layout>
-
     )
 }
 
-export default AboutUs
+export default AboutUs     
