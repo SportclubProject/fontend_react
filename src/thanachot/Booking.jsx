@@ -8,6 +8,8 @@ import HowtoS2 from './HowtoS2';
 import HowtoS3 from './HowtoS3';
 import ContentS3 from './ContentS3';
 import Layout from '../kridchasorn/Layout';
+import HowtoS4 from './HowtoS4';
+import ContentS4 from './ContentS4';
 
 const CustomContext = createContext({});
 
@@ -23,9 +25,11 @@ function Booking(){
     //เพื่อการ back หรือ forword และสรุปจบ
     const [bookdata,setbookdata] = useState(
         {
+            user:"",
             sport:"",
             location:"",
             day:"",     //[today,tomoror]
+            date:"",
             time:"",    //[time]
             coach:"",
             who:{
@@ -41,7 +45,9 @@ function Booking(){
             desc:""
         });
 
-    // useEffect(()=>{},[])
+    useEffect(()=>{
+
+    },[])
 
     function handleNext(){
         setHowto(<HowtoS1 />)
@@ -68,10 +74,10 @@ function Booking(){
     function changeContentS2(sport){
         setContent(<ContentS2   sport={sport} 
                                 changeTostep3={changeHowtoS3} 
-                                changeContentS3={changeContentS3}
+                                changeContentS3={changeContentS3} //Next
 
                                 changeHowtoS1={changeHowtoS1}
-                                changeContentS1={changeContentS1}
+                                changeContentS1={changeContentS1} //Back
                                 />);
     }
     function changeHowtoS3(){
@@ -80,7 +86,24 @@ function Booking(){
     function changeContentS3(data){
         setContent(<ContentS3 data={data}
                     changeTostep2={changeHowtoS2}
-                    changeContentS2={changeContentS2}
+                    changeContentS2={changeContentS2} //Back
+
+                    changeTostep4={changeHowtoS4}
+                    changeContentS4={changeContentS4}
+                    />)
+    }
+    function changeHowtoS4(){
+        setHowto(<HowtoS4 />)
+    }
+
+    function changeContentS4(){
+        setContent(<ContentS4 
+                changeHowtoS1={changeHowtoS1}
+                changeContentS1 = {changeContentS1}
+
+                changeHowtoS3={changeHowtoS3}
+                changeContentS3={changeContentS3}
+
                     />)
     }
     return(

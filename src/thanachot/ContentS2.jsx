@@ -175,7 +175,7 @@ function ContentS2({sport,changeTostep3,changeContentS3,changeHowtoS1,changeCont
     const [selectCourt,setselectCourt] = useState({court:"",sportype:sport});
     const [selectday,setselectday] = useState({day:""});
     const [selectTime,setselectTime] = useState({id:"",time:""});
-    const [showTime,setshowTime] = useState(date_today);
+    const [showTime,setshowTime] = useState(date_init);
     const [selectcoach,setselectcoach] = useState({status:"btn_Nocoach"});
     const [selectwho,setselectwho] = useState({id:"",name:"",des:""})
     const [dataCoach,setdataCoach] = useState([]); 
@@ -194,6 +194,22 @@ function ContentS2({sport,changeTostep3,changeContentS3,changeHowtoS1,changeCont
                     setdataCoach(AvableCoachsYoga);
                     break;
             }
+        }
+        //init display time
+        if(contextValue.bookdata.time != ""){
+            switch(contextValue.bookdata.day){
+                case "btn_day":
+                    setshowTime(date_today);
+                    break;
+                case "btn_tow":
+                    setshowTime(date_tomorrow);
+                    break;
+                default:
+                    setshowTime(date_today);
+                    break;
+            }
+        }else{
+            setshowTime(date_init);
         }
     },[]);
 
@@ -220,22 +236,34 @@ function ContentS2({sport,changeTostep3,changeContentS3,changeHowtoS1,changeCont
         });
     }
     const handleDay=(e,day)=>{
+        const today = new Date(Date.now());
+        const tomorrow = new Date(Date.now());
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
         setselectday({day:day});
-        //update data context booking
+
         contextValue.setbookdata((previousState)=>{ 
             return {...previousState,day:day}
         });
 
-        // const btn = e.target.id;
-        // console.log(btn)
         switch(day){
             case "btn_day":
                 // setshowTime(<ObjShowtime propdata={date_today}/>);
+                const today_form = today.toLocaleString().split(',')[0];
+                //show time button
                 setshowTime(date_today);
+                //update date
+                contextValue.setbookdata((previousState)=>{
+                    return {...previousState,date:today_form}
+                });
                 break;
             case "btn_tow":
                 // setshowTime(<ObjShowtime propdata={date_tomorrow}/>);
+                const tmw_form = tomorrow.toLocaleString().split(',')[0];
                 setshowTime(date_tomorrow);
+                contextValue.setbookdata((previousState)=>{
+                    return {...previousState,date:tmw_form}
+                });
                 break;
         }
     }
@@ -282,7 +310,7 @@ function ContentS2({sport,changeTostep3,changeContentS3,changeHowtoS1,changeCont
                     return {...previousState,coach:status}
                 });
                 contextValue.setbookdata((previousState)=>{ 
-                    return {...previousState,who:{id:"",name:"",des:""}}
+                    return {...previousState,who:{id:"",name:"",des:"",image:""}}
                 });
                 break;
         }
@@ -291,7 +319,7 @@ function ContentS2({sport,changeTostep3,changeContentS3,changeHowtoS1,changeCont
         // console.log(`coach:  ${coach.name} ${coach.id}`);
         setselectwho({id:coach.id,name:coach.name,des:coach.des})
         contextValue.setbookdata((previousState)=>{ 
-            return {...previousState,who:{id:coach.id,name:coach.name,des:coach.des}}
+            return {...previousState,who:{id:coach.id,name:coach.name,des:coach.des,image:coach.image}}
         });
     }
     const handleNext=()=>{

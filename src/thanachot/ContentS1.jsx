@@ -19,11 +19,15 @@ function ContentS1({changeTostep2,changeContentS2}){
 
     useEffect(()=>{
         //reset data
+        const getUserName = "PP"
+
         contextValue.setbookdata((previousState)=>{
             return  {...previousState,
+                user:getUserName,
                 sport:"",
                 location:"",
-                day:"",     //[today,tomoror]
+                day:"",     //[today,tomoror] //this point is dupication object for init value
+                date:"",
                 time:"",    //[time]
                 coach:"",
                 who:{

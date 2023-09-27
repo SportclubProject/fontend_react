@@ -5,42 +5,16 @@ const inputStyle = "mb-2 shadow appearance-none border-2 rounded w-full py-2 px-
 const inputStyleDis = "mb-2 shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline";
 const label = "flex text-sm font-medium mb-2 text-gray-900";
 const inputDesc = "resize-none h-full mb-2 shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
-function ContentS3({changeTostep2,changeContentS2}){
+function ContentS3({changeTostep2,changeContentS2,changeTostep4,changeContentS4}){
     const contextValue = useContext(CustomContext);
 
-    const [dataf2,setdataf2] = useState({});
-    const [act,setact] = useState();
-    const [fname,setfname] = useState();
-    const [lname,setlname] = useState();
-    const [phon,setphone] = useState();
-    const [desc,setdesc] = useState();
-    
     // useEffect(()=>{        
     // },[]);
 
-    function getDate(status){
-        const today = new Date(Date.now());
-
-        const tomorrow = new Date(Date.now());
-        tomorrow.setDate(tomorrow.getDate() + 1);
-
-        // const today = new Date(Date.now()).toLocaleString().split(',')[0];
-        switch(status){
-            case "btn_day":
-                return today.toLocaleString().split(',')[0];
-                break;
-            case "btn_tow":
-                return tomorrow.toLocaleString().split(',')[0];
-                break;
-            default:
-                return today.toLocaleString().split(',')[0];
-                break;
-        }
-        return;
-    }
-
     function handleNext(){
         //summary page
+        changeTostep4();
+        changeContentS4();
     }
 
     function handleBack(){
@@ -70,7 +44,7 @@ function ContentS3({changeTostep2,changeContentS2}){
                         <div class="grid gap-1 md:grid-cols-2">
                             <div>
                                 <label class="flex  text-sm font-medium mb-2 text-gray-900">Date</label>
-                                <input type="text" id="disabled-input" aria-label="disabled input" class={inputStyleDis} value={getDate(contextValue.bookdata.day)} disabled/>
+                                <input type="text" id="disabled-input" aria-label="disabled input" class={inputStyleDis} value={contextValue.bookdata.date} disabled/>
                             </div>
                             <div>
                                 <label class="flex  text-sm font-medium mb-2 text-gray-900">Time (From-To)</label>
@@ -84,9 +58,6 @@ function ContentS3({changeTostep2,changeContentS2}){
                 </div>
 
                 <div>
-                {/* contextValue.setbookdata((previousState)=>{ 
-            return {...previousState,activity:e.target.value}
-        }); */}
                     <label class={label}>Activity name</label>
                     <input type="text" id="activity" className={inputStyle} placeholder="Activity" value={contextValue.bookdata.activity} onChange={
                         (e)=>contextValue.setbookdata((previousState)=>{ 
@@ -133,7 +104,7 @@ function ContentS3({changeTostep2,changeContentS2}){
 
             <div className="m-10 flex justify-between">
                 <button className="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform" onClick={()=>handleBack()}>Back</button>
-                <button type='submit' className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">Next</button>
+                <button type="submit" className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">Next</button>
             </div>
 
            </form>
